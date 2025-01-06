@@ -1,4 +1,4 @@
-package com.vit.isf.jcomponent.blockchain.service;
+package com.hehe.buuu.jcomponent.blockchain.service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -7,8 +7,8 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.vit.isf.jcomponent.blockchain.dao.BlockchainDao;
-import com.vit.isf.jcomponent.blockchain.model.Audit;
+import com.hehe.buuu.jcomponent.blockchain.dao.BlockchainDao;
+import com.hehe.buuu.jcomponent.blockchain.model.Audit;
 
 
 
