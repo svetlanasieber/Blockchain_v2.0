@@ -1,0 +1,102 @@
+package com.vit.isf.jcomponent.blockchain.service;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.vit.isf.jcomponent.blockchain.dao.BlockchainDao;
+import com.vit.isf.jcomponent.blockchain.model.Audit;
+
+
+
+@Component
+public class BlockchainServiceImpl implements BlockchainService {
+	
+	@Autowired
+	BlockchainDao blockchaindao;
+
+	@Override
+	public Audit createAudit(int id) {
+		Audit audit = new Audit();
+		if (id != 0) {
+			audit = auditDataset(id);
+			String data = audit.toString();
+			String hashcode = getSecureData(data);
+			audit.setaId(hashcode);
+		}
+		blockchaindao.addBlockchain(audit);
+
+		
+		return audit;
+	}
+
+	private String generateKey() {
+		
+		Random random = new Random();
+		return random.toString();
+	}
+	
+
+	private static String getSecureData(String data) {
+
+		String generatedPassword = null;
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			byte[] bytes = md.digest(data.getBytes());
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			generatedPassword = sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return generatedPassword;
+	}
+
+
+	private Audit auditDataset(int id) {
+		Audit auditValue = new Audit();
+		switch (id) {
+		case 1:
+			auditValue.setAuditName("Usertest1");
+			auditValue.setAuditData(
+					"Audit Data for the particular value of block chain is found for " + auditValue.getAuditName());
+			break;
+		case 2:
+			auditValue.setAuditName("Usertest2");
+			auditValue.setAuditData(
+					"Audit Data for the particular value of block chain is found for " + auditValue.getAuditName());
+			break;
+		case 3:
+			auditValue.setAuditName("Usertest3");
+			auditValue.setAuditData(
+					"Audit Data for the particular value of block chain is found for " + auditValue.getAuditName());
+			break;
+		case 4:
+			auditValue.setAuditName("KrokodilaGena");
+			auditValue.setAuditData(
+					"Audit Data for the particular value of block chain is found for " + auditValue.getAuditName());
+			break;
+		case 5:
+			auditValue.setAuditName("BengoKotkata");
+			auditValue.setAuditData(
+					"Audit Data for the particular value of block chain is found for " + auditValue.getAuditName());
+			break;
+		default:
+			System.out.println("The Audit Id which you are looking is not found !!");
+			break;
+		}
+		return auditValue;
+
+	}
+
+	@Override
+	public String createBlockchain(String name) {
+		return name;
+		
+	}
+}
