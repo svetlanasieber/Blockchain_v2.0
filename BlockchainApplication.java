@@ -1,4 +1,4 @@
-package com.vit.isf.jcomponent.blockchain;
+package com.hehe.buuu.jcomponent.blockchain;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
